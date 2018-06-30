@@ -1,7 +1,7 @@
 Cpp_2
 =====
 
- Second term of C++ course at Math Institute, University of Wrocław —
+Projects that I've done during second term of C++ course at Math Institute, University of Wrocław
 
 COURSE SYLLABUS (in Polish)
 ===============
