@@ -1,0 +1,6 @@
+#ifndef KONWERSJA_HPP_INCLUDED
+#define KONWERSJA_HPP_INCLUDED
+
+int char2int (char a);
+
+#endif // KONWERSJA_HPP_INCLUDED

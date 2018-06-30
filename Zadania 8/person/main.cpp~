@@ -1,0 +1,85 @@
+#include <algorithm>
+#include <iostream>
+#include <vector>
+
+class Person
+{
+private:
+    static std::vector<Person*> persons_;
+    std::string imie_;
+    std::string nazwisko_;
+
+public:
+    Person(std::string imie, std::string nazwisko)
+        : imie_(imie), nazwisko_(nazwisko)
+    {
+        persons_.push_back(this);
+    }
+
+    Person(const Person& p)
+        : imie_(p.imie_), nazwisko_(p.nazwisko_)
+    {
+        persons_.push_back(this);
+    }
+
+    ~Person()
+    {
+        Person::persons_.erase(std::find(std::begin(Person::persons_),
+                                         std::end(Person::persons_), this));
+    }
+
+    std::string ImieNazwisko() const
+    {
+        return imie_ + " " + nazwisko_;
+    }
+
+    static void OutputPersons(std::ostream& out)
+    {
+        out << "lista osob:\n";
+        for (auto p : Person::persons_)
+        {
+            std::cout << p->ImieNazwisko() << '\n';
+        }
+    }
+};
+
+std::vector<Person*> Person::persons_;
+
+class Worker
+{
+    Person person_;
+    std::string position_;
+public:
+    Worker(const Person& person, std::string position)
+        : person_(person)
+        , position_(position)
+    {
+    }
+};
+
+void Fun2()
+{
+    Person s("Dariusz", "Dabacki");
+    Person t("Eugeniusz", "Ebacki");
+    {
+        Person u("Franciszek", "Fabacki");
+    }
+    Worker w(Person("Grzegorz","Gabacki"),"guard");
+    Person::OutputPersons(std::cout);
+}
+
+void Fun()
+{
+    Person* pq = new Person("Bartosz", "Babacki");
+    Person r("Czeslaw", "Cabacki");
+    Fun2();
+    delete pq;
+}
+
+int main()
+{
+    Person p("Adam", "Abacki");
+    Fun();
+    return 0;
+}
+
